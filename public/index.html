@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="mdc-typography">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css/material-components-web.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Plaster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Averia+Libre" rel="stylesheet">
+  </head>
+  <body>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell">
+        </div>
+        <div class="mdc-layout-grid__cell" style="text-align:center;">
+          <!-- <h1 style="font-family: 'Averia Libre', cursive; color:black;padding-top:0px;font-size:300%;">Computational Science </h1> -->
+          <!-- <h2 style="font-family: 'Averia Libre', cursive; font-size:225%;">University of Puget Sound <br>λuthor : λlex</h2> -->
+          <h2 style="font-family: 'Averia Libre', cursive; font-size:225%;">inspired by KLee<br>λuthor : λlex</h2>
+          <p style="font-family: 'Averia Libre', cursive; font-size:75%;">Are you sure you know what you're doing?</p>
+        </div>
+        <div class="mdc-layout-grid__cell">
+        </div>
+      </div>
+
+    </div>
+    <div class="mdc-grid-list">
+      <ul id="mount_ul" class="mdc-grid-list__tiles">
+
+        <script type="text/javascript">
+
+          class Q {
+              constructor () { this.lst = [] }
+              enqueue (elem) { this.lst.push(elem) }
+              enqueue_head (elem) { this.lst.unshift(elem) }
+              dequeue () { return this.lst.shift() }
+              dequeue_tail() {
+                this.lst.reverse()
+                let tail = this.lst.shift()
+                this.lst.reverse()
+                return tail
+              }
+              peek () { return this.lst[0] }
+              load (lst) { lst.filter((elem) => this.enqueue(elem)) }
+          }
+
+          let orange_specturm = ['e65100', 'ef6c00', 'f57c00', 'fb8c00', 'ff9800', 'ffa726']
+
+          let color_queue = new Q()
+          color_queue.load(orange_specturm)
+
+          let computer_science = {
+            intro : {
+              number : 161,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+              x : false
+            },
+            discreet_mathematics : {
+              number : 210,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+              x : false
+            },
+            data_structures : {
+              number : 261,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+              x : false
+            },
+            paradigms : {
+              number : 291,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+              x : false
+            },
+            software_engineering : {
+              number : 240,
+
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+              x : false
+            },
+            computer_graphics : {
+              number : 315,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+
+              x : false
+            },
+            network_programming : {
+              number : 340,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+
+              x : false
+            },
+            compilers : {
+              number : 365,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+
+              x : false
+            },
+            algorithms : {
+              number : 361,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+
+              x : false
+            },
+            databases : {
+              number : 435,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+
+              x : false
+            },
+            artificial_intelligence : {
+              number : 445,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+
+              x : false
+            },
+            operating_systems : {
+              number : 475,
+              lst : ['eh', 'meh', 'heh', 'eh', 'meh', 'heh'],
+
+              x : false
+            }
+          }
+
+          let interval_time = 125
+
+          function insertAfter(newNode, referenceNode) {
+              referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+          }
+
+          var num_tiles = 0, lst_of_tiles = []
+
+          class Lock {
+            constructor(){
+              this.locked = false
+            }
+
+            aquire(){
+              this.locked = true
+            }
+
+            release() {
+              this.locked = false
+            }
+
+            is_free() {
+              return !this.locked
+            }
+          }
+
+          let lock = new Lock()
+
+          // generate initial tiles
+          let generate_tile = function(data) {
+            // select elemns, create some
+            let tile = document.createElement('li'), tile_primary = document.createElement('div'), header = document.createElement('h1'),number = document.createTextNode(data.number)
+            header.appendChild(number)
+
+            // set properties
+            tile.className = "mdc-grid-tile"
+            tile.style.width = "32.9%"
+            tile_primary.className = 'mdc-grid-tile__primary'
+            tile_primary.style.textAlign = 'center'
+            tile.id = num_tiles-1
+
+            // append children
+            tile_primary.appendChild(header)
+            tile.appendChild(tile_primary)
+            document.getElementById('mount_ul').appendChild(tile)
+
+            // update list & counter
+            lst_of_tiles.push(tile)
+            ++num_tiles
+
+            // add click event listener to tile
+            tile.addEventListener('click', function(e) {
+              // if exists, and not yet expanded and lock is free, then expand
+              if (data.lst && !data.x && lock.is_free()) {
+                lock.aquire()
+                let tmp_lst = []
+                data.x = !data.x // expand
+                for (x in data.lst) {
+                  let til = document.createElement('li'), til_primary = document.createElement('div')
+
+                  til.className = "mdc-grid-tile"
+                  til_primary.className = 'mdc-grid-tile__primary'
+                  let c = color_queue.dequeue()
+                  til_primary.style.backgroundColor = "#"+c
+                  color_queue.enqueue(c)
+
+                  til.appendChild(til_primary)
+                  til.id = tile.id + 's' + tmp_lst.length
+                  til.className += ' ' +tile.id +'s'
+                  til.style.width = "32.9%"
+                  tmp_lst.push(til)
+                }
+
+                let gen_sub = setInterval(function(){
+                  insertAfter(tmp_lst.pop(), tile)
+                  console.log(tmp_lst.length);
+                  if (tmp_lst.length == 0){
+                    lock.release()
+                    clearInterval(gen_sub)
+                  }
+                }, interval_time)
+              } else if (data.lst && data.x && lock.is_free()) {
+                // else, if exists and expanded, and lock is free, then collapse...
+                lock.aquire()
+                data.x = !data.x
+                Element.prototype.remove = function() {
+                  this.parentElement.removeChild(this);
+                }
+                NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+                  for(var i = this.length - 1; i >= 0; i--) {
+                    if(this[i] && this[i].parentElement) {
+                      this[i].parentElement.removeChild(this[i]);
+                    }
+                  }
+                }
+
+                let tmp_lst_eh = []
+                for (let i = 0; i < data.lst.length;i++){
+                  let elem = document.getElementById(tile.id+'s'+i)
+
+                  tmp_lst_eh.push(elem)
+                }
+
+                let int = setInterval(function(){
+                  if (tmp_lst_eh) {
+                    try {
+                      tmp_lst_eh.pop().remove()
+                    } catch(e) {
+                      console.log(e);
+                    }
+                  }
+                  if (tmp_lst_eh.length == 0) {
+                    lock.release()
+                    clearInterval(int)
+                  }
+                }, interval_time)
+              }
+            });
+
+            tile_primary.addEventListener('mouseover', function() {
+              tile_primary.style.backgroundColor = '#000'
+            })
+
+            tile_primary.addEventListener('mouseout', function() {
+              tile_primary.style.backgroundColor = '#212121'
+            })
+          }
+
+          // initialize the tiles
+          let init = function() {
+            for (x in computer_science) {
+              generate_tile(computer_science[x])
+            }
+          }
+
+          init()
+
+        </script>
+
+      </ul>
+    </div>
+
+    <style media="screen">
+      .mdc-grid-title {
+        width:50%;
+      }
+      h1 {
+        margin-top:0px;
+        padding-top: 45%;
+        color: white;
+        vertical-align: middle;
+      }
+      .mdc-grid-tile__primary {
+        background-color:#212121;
+        width:100%;
+        vertical-align: middle;
+      }
+      body{
+        font-family: 'Inconsolata', monospace;
+        font-family: 'Plaster', cursive;
+      }
+    </style>
+    <script src="js/material-components-web.js"></script>
+    <script>mdc.autoInit()</script>
+  </body>
+</html>
